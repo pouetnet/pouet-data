@@ -22,13 +22,17 @@ foreach ($a as $v) {
     $files[$m[1] . $m[2]] = $v;
 }
 
+// Absolute, as outside tools read this; from the request so a local stack
+// links to itself
+$baseURL = (@$_SERVER["HTTPS"] == "on" ? "https" : "http") . "://" . $_SERVER["HTTP_HOST"] . "/";
+
 $output = ["dumps" => [], "latest" => null];
 foreach ($dates as $date => $_true) {
     foreach ($tables as $table => $_true2) {
         $filename = @$files[ $table . $date ]; // "pouetdatadump-".$k2."-".$k.".json.gz";
         if ($filename && file_exists($filename)) {
             $output["dumps"][$date][$table]["filename"] = basename($filename);
-            $output["dumps"][$date][$table]["url"] = "https://data.pouet.net/" . $filename;
+            $output["dumps"][$date][$table]["url"] = $baseURL . $filename;
             $output["dumps"][$date][$table]["size_in_bytes"] = filesize($filename);
         }
     }
