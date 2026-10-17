@@ -25,8 +25,8 @@ $tables = array();
 $files = array();
 foreach($a as $v)
 {
-  preg_match("/pouetdatadump-(.*)-(.*).json/",$v,$m);
   if (strstr($v,".inprogress")) continue;
+  if (!preg_match("/pouetdatadump-(.*)-(.*).json/",$v,$m)) continue;
   $tables[$m[1]] = true;
   $dates[$m[2]] = true;
   $files[$m[1].$m[2]] = $v;
