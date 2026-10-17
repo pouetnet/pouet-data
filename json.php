@@ -12,15 +12,14 @@ $tables = array();
 $files = array();
 foreach($a as $v)
 {
-  preg_match("/pouetdatadump-(.*)-(.*).json/",$v,$m);
   if (strstr($v,".inprogress")) continue;
+  if (!preg_match("/pouetdatadump-(.*)-(.*).json/",$v,$m)) continue;
   $tables[$m[1]] = true;
   $dates[$m[2]] = true;
   $files[$m[1].$m[2]] = $v;
 }
 
-$output = array();
-$latest = false;
+$output = array("dumps" => array(), "latest" => null);
 foreach($dates as $date=>$_true)
 {
   foreach($tables as $table=>$_true2)
@@ -34,8 +33,15 @@ foreach($dates as $date=>$_true)
     }
   }
 }
-arsort($output["dumps"]);
-$output["latest"] = reset($output["dumps"]);
+if ($output["dumps"])
+{
+  arsort($output["dumps"]);
+  $output["latest"] = reset($output["dumps"]);
+}
+else
+{
+  $output["dumps"] = new stdClass; // {} like a non-empty list, not []
+}
 
 header("Content-type: application/json; charset=utf-8");
 echo json_encode($output,JSON_PRETTY_PRINT);
