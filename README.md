@@ -23,8 +23,8 @@ just setup
 ```
 
 This clones this repo and the other site repos under `sites/`, starts
-everything and loads sample data. Data is then on <http://localhost:8084>,
-with no dumps to list until you make some with
+everything and loads sample data. Data is then on
+<http://data.pouet.localhost>, with no dumps to list until you make some with
 `just cron createDataDump`. pouet-infra's
 `ARCHITECTURE.md` describes how it runs in production.
 
@@ -32,3 +32,7 @@ with no dumps to list until you make some with
 
 Open a pull request against `master`. PRs are squash-merged once CI
 passes, and a merged PR is live on data.pouet.net within a minute.
+
+PHP follows [PER Coding Style 3.0](https://www.php-fig.org/per/coding-style/).
+CI flags style issues without blocking the merge; `php-cs-fixer fix`
+(3.95.27) fixes them.
