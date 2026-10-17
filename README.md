@@ -23,8 +23,8 @@ just setup
 ```
 
 This clones this repo and the other site repos under `sites/`, starts
-everything and loads sample data. Data is then on <http://localhost:8084>,
-with no dumps to list until you make some with
+everything and loads sample data. Data is then on
+<http://data.pouet.localhost>, with no dumps to list until you make some with
 `just cron createDataDump`. pouet-infra's
 `ARCHITECTURE.md` describes how it runs in production.
 
